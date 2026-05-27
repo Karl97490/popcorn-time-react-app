@@ -12,6 +12,7 @@ const MovieList = () => {
   };
   return (
     <>
+      <h2>Numbers of movie: {moviesToDisplay.length}</h2>
       {moviesToDisplay.map((movie, id) => {
         return (
           <div key={movie.id} className="card">
