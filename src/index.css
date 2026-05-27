@@ -16,8 +16,6 @@
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -25,11 +23,29 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 body {
   margin: 0;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  min-height: 100svh;
+}
+
+.card {
+  max-width: 80%;
+  margin: 1rem auto;
+  padding: 1rem;
+  border: 1px solid #666;
+  box-shadow: 5px 5px 10px -5px;
+  transition: 0.4s;
+}
+
+.card:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 10px 0px;
 }
