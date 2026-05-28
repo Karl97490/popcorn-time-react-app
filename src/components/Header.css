@@ -7,3 +7,23 @@
     color: white;
     padding: 2rem;
 }
+
+.Header nav {
+    margin: 1rem auto;
+    font-size: 1.2rem;
+}
+
+.Header nav a {
+    text-decoration: none;
+    margin: 0 5px;
+    color: white;
+}
+
+.Header nav a.active {
+    color: orange;
+}
+
+.Header nav a:hover {
+    color: aliceblue;
+    text-decoration: underline;
+}
