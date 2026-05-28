@@ -1,30 +1,26 @@
 import movies from "../data/movies.json";
+import { MovieSummary } from "./MovieSummary";
 import { useState } from "react";
 const MovieList = () => {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
   const deleteMovie = (movieID) => {
-    // moviesToDisplay.splice(movieID, 1)
-    // setMoviesToDisplay([...moviesToDisplay])
-    const filtMoviesArr = moviesToDisplay.filter(
-      (movie) => movie.id !== movieID,
-    );
-    setMoviesToDisplay(filtMoviesArr);
+    const newArr = moviesToDisplay.toSpliced(movieID, 1)
+    // const newArr = moviesToDisplay.filter(
+    //   (movie) => movie.id !== movieID,
+    // );
+    setMoviesToDisplay(newArr)
   };
   return (
     <>
       <h2>Numbers of movie: {moviesToDisplay.length}</h2>
       {moviesToDisplay.map((movie, id) => {
         return (
-          <div key={movie.id} className="card">
-            <h3>{movie.title}</h3>
-
-            {movie.imgURL && <img src={movie.imgURL} alt="Movie Picture" />}
-
-            <p>Year: {movie.year}</p>
-            <p>Rating: {movie.rating}</p>
-            <button onClick={() => deleteMovie(movie.id)}>Delete</button>
-            {/* <button onClick={() => deleteMovie(id)}>Delete</button> */}
-          </div>
+          <MovieSummary
+            key={movie.id}
+            data={movie}
+            idArr={id}
+            deleteFunction={deleteMovie}
+          />
         );
       })}
     </>
