@@ -6,15 +6,16 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Contact } from "./pages/Contact";
 import { About } from "./pages/About";
+import { MovieDetails } from "./components/MovieDetails";
 
 function App() {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
 
   const deleteMovie = (movieID) => {
-    const newArr = moviesToDisplay.toSpliced(movieID, 1);
-    // const newArr = moviesToDisplay.filter(
-    //   (movie) => movie.id !== movieID,
-    // );
+    // const newArr = moviesToDisplay.toSpliced(movieID, 1);
+    // moviesToDisplay.splice(movieID, 1);
+    const newArr = moviesToDisplay.filter((movie) => movie.id !== movieID);
+    // setMoviesToDisplay(moviesToDisplay);
     setMoviesToDisplay(newArr);
   };
   return (
@@ -30,9 +31,12 @@ function App() {
             />
           }
         />
+
+        <Route path="/movies/:movieId" element={<MovieDetails moviesArr={moviesToDisplay} />} />
+
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        <Route path="*" element={<div>401</div>}></Route>
+        {/* <Route path="*" element={<div>401</div>}></Route> */}
       </Routes>
       <Footer />
     </>

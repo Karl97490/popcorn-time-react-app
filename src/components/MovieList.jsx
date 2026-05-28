@@ -10,7 +10,6 @@ const MovieList = (props) => {
           <MovieSummary
             key={movie.id}
             data={movie}
-            idArr={id}
             deleteFunction={deleteFunction}
           />
         );
