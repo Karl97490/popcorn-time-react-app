@@ -11,6 +11,8 @@ import { MovieDetails } from "./components/MovieDetails";
 function App() {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
   const [title, setTitle] = useState("");
+  const [year, setYear] = useState("");
+  const [rating, setRating] = useState("");
 
   const deleteMovie = (movieID) => {
     // const newArr = moviesToDisplay.toSpliced(movieID, 1);
@@ -24,30 +26,65 @@ function App() {
     e.preventDefault();
     const newMovie = {
       title: title,
-      year: 1999,
-      rating: 10,
+      year: year,
+      rating: rating,
     };
     const newList = [newMovie, ...moviesToDisplay];
-    console.log(newList)
+    console.log(newList);
     setMoviesToDisplay(newList);
-    setTitle("")
+    setTitle("");
+    setYear("");
+    setRating("");
   };
 
   return (
     <>
       <Header numberOfMovies={moviesToDisplay.length} />
 
-      <section onSubmit={handleSubmit}>
-        <form action="">
-          <input
-            value={title}
-            type="text"
-            name="title"
-            placeholder="The Godfather"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
+      <section>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="">
+            Title
+            <input
+              value={title}
+              type="text"
+              name="title"
+              placeholder="The Godfather"
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+          </label>
+          <label>
+            Year
+            <input
+              value={year}
+              type="number"
+              name="year"
+              placeholder="1999"
+              required={true}
+              min={1950}
+              max={2050}
+              onChange={(e) => {
+                setYear(e.target.value);
+              }}
+            />
+          </label>
+          <label>
+            Rating
+            <input
+              value={rating}
+              type="number"
+              min={0}
+              max={10}
+              name="rating"
+              placeholder="10"
+              onChange={(e) => {
+                setRating(e.target.value);
+              }}
+            />
+          </label>
+
           <button>Create movie</button>
         </form>
       </section>
