@@ -24,14 +24,20 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const newId = Math.max(...moviesToDisplay.map((movie) => movie.id)) + 1;
+
     const newMovie = {
+      id: newId,
       title: title,
       year: year,
       rating: rating,
     };
+
     const newList = [newMovie, ...moviesToDisplay];
-    console.log(newList);
+
     setMoviesToDisplay(newList);
+
     setTitle("");
     setYear("");
     setRating("");
