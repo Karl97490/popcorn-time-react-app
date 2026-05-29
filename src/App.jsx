@@ -7,12 +7,10 @@ import { Routes, Route } from "react-router-dom";
 import { Contact } from "./pages/Contact";
 import { About } from "./pages/About";
 import { MovieDetails } from "./components/MovieDetails";
+import { AddMovie } from "./components/AddMovie";
 
 function App() {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
-  const [title, setTitle] = useState("");
-  const [year, setYear] = useState("");
-  const [rating, setRating] = useState("");
 
   const deleteMovie = (movieID) => {
     // const newArr = moviesToDisplay.toSpliced(movieID, 1);
@@ -22,78 +20,22 @@ function App() {
     setMoviesToDisplay(newArr);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const createMovie = (newMovie) => {
     const newId = Math.max(...moviesToDisplay.map((movie) => movie.id)) + 1;
 
-    const newMovie = {
+    newMovie = {
+      ...newMovie,
       id: newId,
-      title: title,
-      year: year,
-      rating: rating,
     };
 
     const newList = [newMovie, ...moviesToDisplay];
 
     setMoviesToDisplay(newList);
-
-    setTitle("");
-    setYear("");
-    setRating("");
   };
 
   return (
     <>
       <Header numberOfMovies={moviesToDisplay.length} />
-
-      <section>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="">
-            Title
-            <input
-              value={title}
-              type="text"
-              name="title"
-              placeholder="The Godfather"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            Year
-            <input
-              value={year}
-              type="number"
-              name="year"
-              placeholder="1999"
-              required={true}
-              min={1950}
-              max={2050}
-              onChange={(e) => {
-                setYear(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            Rating
-            <input
-              value={rating}
-              type="number"
-              min={0}
-              max={10}
-              name="rating"
-              placeholder="10"
-              onChange={(e) => {
-                setRating(e.target.value);
-              }}
-            />
-          </label>
-
-          <button>Create movie</button>
-        </form>
-      </section>
 
       <Routes>
         <Route
@@ -111,6 +53,7 @@ function App() {
           element={<MovieDetails moviesArr={moviesToDisplay} />}
         />
 
+        <Route path="/create" element={<AddMovie onCreate={createMovie} />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         {/* <Route path="*" element={<div>401</div>}></Route> */}
