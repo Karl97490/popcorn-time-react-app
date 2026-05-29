@@ -29,6 +29,21 @@ body {
   margin: 0;
 }
 
+form {
+  margin: 1rem auto;
+}
+
+input {
+  background-color: white;
+  color: #333;
+  margin: 1rem;
+  font-size: 1.1em;
+}
+
+button {
+  font-size: 1.1em;
+}
+
 #root {
   max-width: 100%;
   margin: 0 auto;

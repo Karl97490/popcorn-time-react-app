@@ -10,17 +10,48 @@ import { MovieDetails } from "./components/MovieDetails";
 
 function App() {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
+  const [title, setTitle] = useState("");
 
   const deleteMovie = (movieID) => {
     // const newArr = moviesToDisplay.toSpliced(movieID, 1);
     // moviesToDisplay.splice(movieID, 1);
-    const newArr = moviesToDisplay.filter((movie) => movie.id !== movieID);
     // setMoviesToDisplay(moviesToDisplay);
+    const newArr = moviesToDisplay.filter((movie) => movie.id !== movieID);
     setMoviesToDisplay(newArr);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newMovie = {
+      title: title,
+      year: 1999,
+      rating: 10,
+    };
+    const newList = [newMovie, ...moviesToDisplay];
+    console.log(newList)
+    setMoviesToDisplay(newList);
+    setTitle("")
+  };
+
   return (
     <>
       <Header numberOfMovies={moviesToDisplay.length} />
+
+      <section onSubmit={handleSubmit}>
+        <form action="">
+          <input
+            value={title}
+            type="text"
+            name="title"
+            placeholder="The Godfather"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <button>Create movie</button>
+        </form>
+      </section>
+
       <Routes>
         <Route
           path="/"
@@ -32,7 +63,10 @@ function App() {
           }
         />
 
-        <Route path="/movies/:movieId" element={<MovieDetails moviesArr={moviesToDisplay} />} />
+        <Route
+          path="/movies/:movieId"
+          element={<MovieDetails moviesArr={moviesToDisplay} />}
+        />
 
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
